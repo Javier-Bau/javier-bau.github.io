@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Javier Bautista Luis — Sistemas & Seguridad</title>
+<link rel="icon" href="logo.png">
+<style>
+    :root {
+      --bg: #0e0e11;
+      --bg-soft: #16161c;
+      --text: #e6e6eb;
+      --muted: #9a9aa3;
+      --accent: #5da9ff;
+      --border: #23232b;
+      --nav-height: 60px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+    html {scroll-behavior: smooth;}
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { color: var(--accent); }
+
+    nav {
+      position: sticky;
+      top: 0;
+      height: var(--nav-height);
+      background: rgba(14, 14, 17, 0.8); /* Efecto traslúcido */
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      z-index: 100;
+    }
+
+    nav a {
+      margin-right: 1.5rem;
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--accent); }
+
+    .container {
+      margin: 0;
+      width: 100vw; 
+      max-width: 1500px;
+      display: grid;
+      grid-template-columns: 20vw 1fr;
+      align-items: start;
+      
+    }
+
+    aside {
+      position: sticky;
+      top: calc(var(--nav-height) + 3rem);
+      align-self: start;
+      display: flex;
+      flex-direction: column;
+      padding-left: 2rem;
+      height: fit-content;
+      text-align: center;
+    }
+
+    aside strong {
+      display: block;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 0.05rem;
+      color: var(--accent);
+    }
+    
+    aside a {
+      position: relative;
+      display: inline-block; /* <-- importante para que solo abarque el texto */
+      margin-bottom: 0.8rem;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    aside a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0%;
+      height: 100%;
+      background: rgba(93, 169, 255, 0.8);
+      border-radius: 10px;
+      transition: 0.5s;
+      margin: 0 10%;
+      z-index: -1;
+    }
+
+    aside a:hover:not(.social-button)::after {
+      width: 80%;
+      transition: 0.2s;
+    }
+    
+    aside a:hover {
+      color: white;
+    }
+    
+    main {max-width: 100vw; padding: 25px;}
+
+    main section { padding-top: 4rem; }
+    main #titulo { padding-top: 0; }
+
+    h1 { margin: 0 0 0.5rem 0; font-size: 2.2rem; }
+    h2 {
+      font-size: 1.4rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.5rem;
+      color: var(--accent);
+    }
+
+    p { color: var(--muted); margin: 0.8rem 0; }
+    ul { padding-left: 1.2rem; }
+    li { margin-bottom: 0.6rem; color: var(--muted); }
+
+    .project {
+      border: 1px solid var(--border);
+      background: var(--bg-soft);
+      padding: 20px !important;
+      margin-bottom: 2rem;
+      padding-top: 0px !important; 
+    }
+
+    .studies { 
+      padding-bottom: 0 !important; 
+      padding: 10px 15px !important;
+      border: 1px solid var(--border);
+      background: var(--bg-soft);
+      margin-bottom: 1rem;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: right;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      margin-top: 1.2rem;
+    }
+
+    .btn {
+      padding: 0.45rem 0.9rem;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(0, 0, 0, 0.25);
+    }
+
+    .btn-primary {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .btn-primary:hover { background: rgba(0, 0, 0, 0.25); }
+
+    footer {
+      max-width: 1000px;
+      margin: 5rem auto 2rem;
+      padding: 2rem 1.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    aside {max-width: 20vw;}
+    main {max-width: 80vw !important; }
+    @media (max-width: 800px) {
+      .container { grid-template-columns: 1fr; gap: 1rem; }
+      aside { display: none; }
+    main {max-width: 100vw !important; }
+    }
+    
+
+    b {
+      color: rgba(255,255,255, 0.7);
+    }
+    
+    pre {
+      background: rgba(255,255,255, 0.05);
+      padding: 1rem;
+      overflow-x: auto;
+      border-radius: 4px;
+      font-family: monospace;
+      margin: 1.2rem 0;
+    }
+    pre b {
+      color: rgba(93, 169, 255, 0.95);
+    }
+
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html">Inicio</a>
+  <!--<a href="proyectos.html">Proyectos</a>-->
+  <a href="#contacto">Contacto</a>
+</nav>
+
+<div class="container">
+  <!-- MAIN -->
+    <aside>
+    <strong>Contenido</strong>
+    <a href="#introduccion"><b>1. Introducción</b></a>
+    <a href="#proxy-directo"><b>2. Proxy Directo</b></a>
+    <a href="#proxy-indirecto"><b>3. Proxy Indirecto</b></a>
+    <a href="#conclusiones"><b>4. Conclusiones</b></a>
+    <!--<a href="#proyectos">Proyectos</a>-->
+  </aside>
+  <main>
+
+    <section id="estudios">
+      <h1>Análisis de Tráfico de Red a través de Proxies y Filtrado de Tráfico con NFTables</h1>
+    </section>
+
+    <section id="introduccion">
+      <h2>1. Introducción - Contexto, objetivo y especificación de la red</h2>
+      <h3>1.1. Contexto de este laboratorio</h2>
+      <p>Este laboratorio <b>parte de una práctica de la asignatura Seguridad en Redes</b>, en la que inicialmente se nos pedía desarrollar un Proxy directo y configurar reglas básicas de NFTables. A partir de este proyecto, se ha ampliado el trabajo para realizar un <b>análisis</b> más profundo del <b>tráfico que pasa por los proxies</b>, observando cómo circula a través de los distintos hooks y explorando posibles formas de <b>bypasear la configuración inicial</b>. Para ello, se implementó primero un <b>Proxy directo</b> y posteriormente un <b>Proxy inverso</b>, con el objetivo de disponer de más información para su análisis.</h2>
+      <h3>1.2. Objetivo del laboratorio</h2>
+      <p>El objetivo de este proyecto es <b>familiarizarnos no solo con el uso de NFTables</b>, sino también comprender los <b>hooks</b> por los que pasa un paquete dentro de un host y por donde debería o no de pasar un paquete. Además, introduciremos los conceptos de <b>Proxy directo</b> y <b>Proxy inverso</b> que nos permitirán desarrollar <b>arquitecturas de red seguras</b> tanto en el lado del cliente(Directo) como desde el lado del servidor(Inverso)</p>
+      <h3>1.3. Especificación de la red</h2>
+      <p>En esta práctica hemos usado una topología de red bastante simple en la que hay <b>3 dispositivos y 2 redes diferentes</b>. Dentro de esta red habría un dispositivo que actuaría de <b>cortafuegos/proxy y router</b> entre las dos redes y luego otros <b>dos dispositivos</b> que actuarían como <b>cliente y servidor.</b><br><br>Para la implementación de esta topología de red hemos usado 3 máquinas virtuales con ubuntu y xcfe(Para mayor ligereza)</p>
+      <figure>
+        <img src="src/img/proxys/topologia-red.png" alt="Descripción">
+        <figcaption style="color: rgba(255,255,255,0.4);">Topología de red implementada</figcaption>
+      </figure><br>
+      <p>Este conjunto de redes ha sido configurado mediante los comandos ip address/route/link. Por ejemplo, para configurar el firewall que tenía que ser además capaz de redirigir paquetes hacemos lo siguiente:</p>
+      <h3>Configuración MV3:</h3>
+      <pre><code><b>sudo ip link set dev enp0s3 up</b>  // Ponemos a UP la interfaz de red enp0s3 para podernos comunicar por ahí
+<b>sudo ip link set dev enp0s8 up</b>  // Ponemos a UP la interfaz de red enp0s8 para podernos comunicar por ahí
+<b>sudo ip addr add 192.168.0.3/24 dev enp0s3</b>  // Añadimos la dirección IPv4 192.168.0.3 con mascara de red 255.255.255.0 en la interfaz enp0s3
+<b>sudo ip addr add 172.16.0.3/16 dev enp0s8</b>  // Añadimos la dirección IPv4 192.168.0.3 con mascara de red 255.255.0.0 en la interfaz enp0s8
+<b>sudo sysctl -w net.ipv4.ip_forward=1</b>  // Permitimos que el host pueda hacer fordward
+</pre></code><br>
+      <p>Por último desplegamos 2 servidores web, uno en el cliente y otro en el servidor con apache2 para ir probando las diferentes conexiones (via HTTP)</p>
+      <pre><code><b>systemctl start apache2 && systemctl enable apache2</b> // Iniciamos y habilitamos el servicio de apache2</pre></code>
+    </section>
+  </main>
+
+</div>
+
+<footer>
+  Desarrollado por Javier Bautista Luis © 2026
+  <p>Página web incompleta | Sección de proyectos actualmente en desarrollo</p>
+</footer>
+
+</body>
+</html>

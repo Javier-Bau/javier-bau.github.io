@@ -96,7 +96,38 @@
     }
 
     main section { padding-top: 4rem; }
-    main #titulo { padding-top: 0; }
+    main #titulo { 
+      padding-top: 0; 
+      display: flex; 
+      flex-direction: row; 
+      gap: 1rem;
+    }
+    
+    img {
+      border-radius: 50%; 
+      max-height: 10rem;
+      max-width: 10rem;
+      margin: auto;
+    }
+    
+    @media (min-width: 800px) { 
+      img {
+        border-radius: 50%; 
+        max-height: 10rem;
+      }
+    }
+    @media (max-width: 800px) { 
+      main #titulo{
+        padding-top: 0; 
+        display: flex; 
+        margin: auto;
+        flex-direction: column; 
+        gap: 1rem;
+      }
+      .mainInfo {
+        text-align: center;    
+      }
+    }
 
     h1 { margin: 0 0 0.5rem 0; font-size: 2.2rem; }
     h2 {
@@ -254,18 +285,18 @@
 
   <!-- MAIN -->
   <main>
-    <section id="titulo" style="display: flex; flex-direction: row; gap: 1rem;">
-      <img src="foto.jpeg" style="border-radius: 50%; max-height: 10rem;">
-      <div style="min-height: 10rem; align-items: center;">
+    <section id="titulo" style="">
+      <img src="foto.jpeg" style="">
+      <div class="mainInfo" style="min-height: 10rem; align-items: center;">
 	      <h1>Javier Bautista Luis</h1>
-        <p>Estudiante de Ingeniería Informática orientado a Blue Team, SOC y análisis de malware, con especial interés en sistemas y comprensión a bajo nivel.</p>
+        <p>Estudiante de Ingeniería Informática orientado a SO internals, análisis de malware y diseño, y hardening de redes; con especial interés en la comprensión a bajo nivel.</p>
       </div>
     </section>
 
     <section id="estudios">
       <h2>Estudios / Certificaciones</h2>
       <div class="studies">
-        <div>Septiembre 2023 - Junio 2026</div>
+        <div>Septiembre 2023 - Junio 2027</div>
         <p style="color: white;"><b>Grado en Ingeniería Informática (Rama de ciencias de la computación) - Universidad Complutense de Madrid</b></p>
       </div>
       <div class="studies">
@@ -347,22 +378,32 @@
      <!--<section id="proyectos">
       <h2>Laboratorios / Proyectos</h2>
       <div class="project">
-        <h3 style="color: #5da9ff;">Servidor Linux endurecido</h3>
+        <h3 style="color: #5da9ff;">RELF - Simulador de resolución de simbolos y parser de archivos ELF </h3>
         <p>
-          Despliegue y hardening de un servidor Linux expuesto a Internet,
-          aplicando buenas prácticas de seguridad.
+         Desarrollé un proyecto en C que simula la resolución de símbolos externos en archivos ELF, desde la sección .dynsym del ejecutable hasta la .dynsym de la biblioteca compartida correspondiente, incluyendo la simulación de PLT/GOT. Además, implementa un parsing simplificado de ELF similar a readelf, pero orientado a relacionar y analizar las dependencias internas del archivo, facilitando la comprensión de cómo se enlazan y resuelven los símbolos durante la ejecución.
         </p>
 
         <div class="buttons">
           <a class="btn btn-primary" href="https://github.com/tuusuario/proyecto1" target="_blank">
             GitHub
           </a>
-          <a class="btn" href="/proyectos/servidor-linux.html">
+        </div>
+      </div>
+      <div class="project">
+        <h3 style="color: #5da9ff;">Análisis de Tráfico de Red a través de Proxies y Filtrado de Tráfico con NFTables</h3>
+        <p>
+         Análisis de tráfico de red mediante un proxy inverso y un proxy directo, utilizando NFTables para filtrado avanzado de paquetes en los diferentes hooks, y Nginx/Apache2 como servidores web de prueba, permitiendo estudiar patrones de comunicación, detectar anomalías y profundizar en la seguridad de aplicaciones cliente-servidor.
+        </p>
+
+        <div class="buttons">
+          <a class="btn btn-primary" href="https://github.com/tuusuario/proyecto1" target="_blank">
+            GitHub
+          </a>
+          <a class="btn" href="proxys-red.html">
             Ver detalles
           </a>
         </div>
       </div>
-
     </section>-->
     
     <section id="contacto">
