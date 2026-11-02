@@ -3,7 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Javier Bautista Luis — Arquitectura de Hardware</title>
+<title>Javier Bautista Luis — Arquitectura de Hardware & Computación</title>
+<meta name="description" content="Portfolio de Javier Bautista Luis. Estudiante de Ingeniería Informática (UCM) especializado en Arquitectura de Hardware, microarquitectura, procesamiento vectorial RISC-V y simulación con gem5.">
+<meta name="author" content="Javier Bautista Luis">
+<meta property="og:title" content="Javier Bautista Luis — Arquitectura de Hardware">
+<meta property="og:description" content="Investigación en microarquitectura vectorial RISC-V con gem5, sistemas a bajo nivel y lógica digital.">
+<meta property="og:image" content="src/img/foto.jpeg">
+<meta property="og:type" content="website">
 <link rel="icon" href="src/img/logo.png">
 <style>
     :root {
@@ -19,7 +25,7 @@
     * {
       box-sizing: border-box;
     }
-    html {scroll-behavior: smooth;}
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
       font-family: system-ui, -apple-system, sans-serif;
@@ -34,14 +40,24 @@
       position: sticky;
       top: 0;
       height: var(--nav-height);
-      background: rgba(14, 14, 17, 0.8); /* Efecto traslúcido */
+      background: rgba(14, 14, 17, 0.85); /* Efecto traslúcido */
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border);
       padding: 0 1.5rem;
       display: flex;
       align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
       z-index: 100;
     }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .nav-links::-webkit-scrollbar { display: none; }
 
     nav a {
       margin-right: 1.5rem;
@@ -49,9 +65,21 @@
       text-decoration: none;
       font-weight: 500;
       transition: color 0.2s;
+      white-space: nowrap;
     }
 
     nav a:hover { color: var(--accent); }
+
+    .nav-cv-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      padding: 0.35rem 0.8rem;
+      border-radius: 4px;
+      white-space: nowrap;
+      margin-right: 0;
+    }
 
     .container {
       max-width: 1000px;
@@ -100,7 +128,8 @@
       padding-top: 0; 
       display: flex; 
       flex-direction: row; 
-      gap: 1rem;
+      gap: 1.5rem;
+      align-items: center;
     }
     
     img {
@@ -108,6 +137,7 @@
       max-height: 10rem;
       max-width: 10rem;
       margin: auto;
+      border: 2px solid var(--border);
     }
     
     @media (min-width: 800px) { 
@@ -117,15 +147,19 @@
       }
     }
     @media (max-width: 800px) { 
-      main #titulo{
+      main #titulo {
         padding-top: 0; 
         display: flex; 
         margin: auto;
         flex-direction: column; 
         gap: 1rem;
+        text-align: center;
       }
       .mainInfo {
         text-align: center;    
+      }
+      .hero-actions {
+        justify-content: center !important;
       }
     }
 
@@ -142,37 +176,126 @@
     ul { padding-left: 1.2rem; }
     li { margin-bottom: 0.6rem; color: var(--muted); }
 
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.9em;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 0.15rem 0.35rem;
+      border-radius: 3px;
+      color: #e6e6eb;
+    }
+
     .project {
       border: 1px solid var(--border);
       background: var(--bg-soft);
-      padding: 20px !important;
-      margin-bottom: 2rem;
-      padding-top: 0px !important; 
+      padding: 20px;
+      margin-bottom: 1.5rem;
+      border-radius: 6px;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .project:hover {
+      border-color: rgba(93, 169, 255, 0.4);
+    }
+
+    .project h3 {
+      margin-top: 0;
+      margin-bottom: 0.6rem;
+      color: var(--accent);
+      font-size: 1.15rem;
+    }
+
+    .project-tags {
+      display: flex;
+      gap: 0.45rem;
+      flex-wrap: wrap;
+      margin-top: 0.8rem;
+    }
+
+    .tag {
+      font-size: 0.75rem;
+      padding: 0.15rem 0.55rem;
+      background: rgba(93, 169, 255, 0.1);
+      color: var(--accent);
+      border-radius: 3px;
+      border: 1px solid rgba(93, 169, 255, 0.25);
     }
 
     .studies { 
-      padding-bottom: 0 !important; 
-      padding: 10px 15px !important;
+      padding: 14px 18px;
       border: 1px solid var(--border);
       background: var(--bg-soft);
       margin-bottom: 1rem;
+      border-radius: 6px;
+    }
+
+    .experience-highlight {
+      border-color: rgba(93, 169, 255, 0.4);
+      background: linear-gradient(180deg, rgba(93, 169, 255, 0.05) 0%, var(--bg-soft) 100%);
+    }
+
+    .exp-badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 0.15rem 0.5rem;
+      background: rgba(93, 169, 255, 0.15);
+      color: var(--accent);
+      border-radius: 3px;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+
+    .lang-grid {
+      display: flex;
+      flex-direction: row;
+      gap: 12px;
+    }
+
+    .lang-card {
+      width: 50%;
+      text-align: center;
+      padding: 16px;
+    }
+
+    @media (max-width: 650px) {
+      .lang-grid {
+        flex-direction: column;
+      }
+      .lang-card {
+        width: 100%;
+      }
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      margin-top: 1.2rem;
     }
 
     .buttons {
       display: flex;
-      justify-content: right;
+      justify-content: flex-end;
       gap: 0.8rem;
       flex-wrap: wrap;
       margin-top: 1.2rem;
     }
 
     .btn {
-      padding: 0.45rem 0.9rem;
+      padding: 0.45rem 0.95rem;
       border: 1px solid var(--border);
       background: transparent;
       color: var(--text);
       text-decoration: none;
       font-size: 0.9rem;
+      border-radius: 4px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      transition: all 0.2s ease;
     }
 
     .btn:hover {
@@ -184,9 +307,18 @@
     .btn-primary {
       border-color: var(--accent);
       color: var(--accent);
+      background: rgba(93, 169, 255, 0.08);
     }
 
-    .btn-primary:hover { background: rgba(0, 0, 0, 0.25); }
+    .btn-primary:hover {
+      background: rgba(93, 169, 255, 0.2);
+    }
+
+    .btn-github svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
 
     footer {
       max-width: 1000px;
@@ -203,7 +335,7 @@
       aside { display: none; }
     }
     
-    /* From Uiverse.io by aadium */ 
+    /* Social buttons */ 
     .social-buttons {
       display: flex;
       justify-content: center;
@@ -215,40 +347,52 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 50px;
-      height: 50px;
+      width: 46px;
+      height: 46px;
       border-radius: 50%;
       margin: 0 5px;
-      background-color: #fff;
-      box-shadow: 0px 0px 4px #00000027; 
-      border: 2px solid #5da9ff;
       background: var(--bg);
-      
-      fill: #5da9ff;
+      border: 2px solid var(--accent);
+      transition: all 0.25s ease;
+      color: var(--accent);
     }
 
     .social-button:hover {
-      box-shadow: 0px 0px 6px 3px #00000027;
-      fill: #000;
-      box-shadow: 0px 0px 10px #5da9ff;
+      box-shadow: 0px 0px 10px var(--accent);
+      transform: translateY(-2px);
     }
 
     .social-buttons svg {
       height: 20px;
-      fill: #5da9ff;
+      width: 20px;
+      fill: var(--accent);
+    }
+
+    .social-button.email svg {
+      stroke: var(--accent);
     }
 
     b {
-      color: rgba(255,255,255, 0.7);
+      color: rgba(255,255,255, 0.85);
     }
 
 </style>
 </head>
 <body>
 <nav>
-  <a href="index.html">Inicio</a>
-  <!--<a href="proyectos.html">Proyectos</a>-->
-  <a href="#contacto">Contacto</a>
+  <div class="nav-links">
+    <a href="#titulo">Inicio</a>
+    <a href="#experiencia">Experiencia</a>
+    <a href="#proyectos">Proyectos</a>
+    <a href="#habilidades">Habilidades</a>
+    <a href="#sobre-mi">Sobre mí</a>
+    <a href="#estudios">Estudios</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+  <a href="src/cv.pdf" class="btn btn-primary nav-cv-btn" target="_blank" download>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+    Descargar CV
+  </a>
 </nav>
 
 <div class="container">
@@ -256,21 +400,22 @@
   <!-- MENU -->
   <aside>
     <strong>Contenido</strong>
-    <a href="#estudios">Estudios</a>
-    <a href="#idiomas">Idiomas</a>
+    <a href="#experiencia">Experiencia</a>
+    <a href="#proyectos">Proyectos</a>
     <a href="#habilidades">Habilidades</a>
     <a href="#sobre-mi">Sobre mí</a>
-    <a href="#experiencia">Experiencia</a>
-    <!--<a href="#proyectos">Proyectos</a>-->
+    <a href="#estudios">Estudios</a>
+    <a href="#idiomas">Idiomas</a>
+    <a href="#contacto">Contacto</a>
     
     <div class="social-buttons">
-      <a href="mailto:javier.bautistaluis@gmail.com" class="social-button email">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 7L10.94 11.3375C11.5885 11.7428 12.4115 11.7428 13.06 11.3375L20 7M5 18H19C20.1046 18 21 17.1046 21 16V8C21 6.89543 20.1046 6 19 6H5C3.89543 6 3 6.89543 3 8V16C3 17.1046 3.89543 18 5 18Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      <a href="mailto:javier.bautistaluis@gmail.com" class="social-button email" title="Enviar correo">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 7L10.94 11.3375C11.5885 11.7428 12.4115 11.7428 13.06 11.3375L20 7M5 18H19C20.1046 18 21 17.1046 21 16V8C21 6.89543 20.1046 6 19 6H5C3.89543 6 3 6.89543 3 8V16C3 17.1046 3.89543 18 5 18Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
       </a>
-      <a href="https://github.com/javier-bau" class="social-button github">
+      <a href="https://github.com/javier-bau" class="social-button github" target="_blank" rel="noopener noreferrer" title="Perfil de GitHub">
         <svg class="cf-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="-2.5 0 19 19"><path d="M9.464 17.178a4.506 4.506 0 0 1-2.013.317 4.29 4.29 0 0 1-2.007-.317.746.746 0 0 1-.277-.587c0-.22-.008-.798-.012-1.567-2.564.557-3.105-1.236-3.105-1.236a2.44 2.44 0 0 0-1.024-1.348c-.836-.572.063-.56.063-.56a1.937 1.937 0 0 1 1.412.95 1.962 1.962 0 0 0 2.682.765 1.971 1.971 0 0 1 .586-1.233c-2.046-.232-4.198-1.023-4.198-4.554a3.566 3.566 0 0 1 .948-2.474 3.313 3.313 0 0 1 .091-2.438s.773-.248 2.534.945a8.727 8.727 0 0 1 4.615 0c1.76-1.193 2.532-.945 2.532-.945a3.31 3.31 0 0 1 .092 2.438 3.562 3.562 0 0 1 .947 2.474c0 3.54-2.155 4.32-4.208 4.548a2.195 2.195 0 0 1 .625 1.706c0 1.232-.011 2.227-.011 2.529a.694.694 0 0 1-.272.587z"></path></svg>
       </a>
-      <a href="https://www.linkedin.com/in/javier-bautista-luis-802675330" class="social-button linkedin">
+      <a href="https://www.linkedin.com/in/javier-bautista-luis-802675330" class="social-button linkedin" target="_blank" rel="noopener noreferrer" title="Perfil de LinkedIn">
         <svg viewBox="0 -2 44 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <g id="Icons" stroke="none" stroke-width="1">
             <g transform="translate(-702.000000, -265.000000)">
@@ -285,48 +430,100 @@
 
   <!-- MAIN -->
   <main>
-    <section id="titulo" style="">
-      <img src="src/img/foto.jpeg" style="">
-      <div class="mainInfo" style="min-height: 10rem; align-items: center;">
-      <h1>Javier Bautista Luis</h1>
+    <section id="titulo">
+      <img src="src/img/foto.jpeg" alt="Javier Bautista Luis">
+      <div class="mainInfo">
+        <h1>Javier Bautista Luis</h1>
         <p>Estudiante de Ingeniería Informática con foco en ser arquitecto de hardware. Orientado a la microarquitectura, el procesamiento vectorial y el entendimiento a bajo nivel, bajando a los conceptos físicos y transistores cuando es necesario.</p>
+        <div class="hero-actions">
+          <a href="src/cv.pdf" class="btn btn-primary" target="_blank" download>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            Descargar CV (PDF)
+          </a>
+          <a href="#contacto" class="btn">
+            Contactar
+          </a>
+        </div>
       </div>
     </section>
 
-    <section id="estudios">
-      <h2>Estudios / Certificaciones</h2>
-      <div class="studies">
-        <div>Septiembre 2023 - Junio 2027</div>
-        <p style="color: white;"><b>Grado en Ingeniería Informática (Rama de ciencias de la computación) - Universidad Complutense de Madrid</b></p>
+    <!-- 1. EXPERIENCIA -->
+    <section id="experiencia">
+      <h2>Experiencia</h2>
+      
+      <div class="studies experience-highlight">
+        <span class="exp-badge">Investigación Académica & TFG</span>
+        <h3 style="margin: 0.3rem 0 0.5rem 0;"><b style="color: #5da9ff;">Arquitecturas Vectoriales y Modelado gem5 — UCM</b></h3>
+        <p>Investigación de grado bajo la supervisión de los profesores <b>José Ignacio Gómez Pérez</b> y <b>Christian Tenllado van der Reijden</b>. Modelado de extensiones de arquitectura vectorial (Vitruvius y Ara) utilizando el simulador de microarquitectura <b>gem5</b>.</p>
+        <p>Involucra la extracción y reproducción de trazas RAVE, el modelado preciso de archivos de registros vectoriales y la evaluación rigurosa del rendimiento en el subsistema de memoria.</p>
       </div>
+
       <div class="studies">
-        <div>Septiembre 2011 - Junio 2022</div>
-        <p style="color: white;"><b>Titulado en Enseñanzas Profesionales de Música - Conservatorio Profesional de Música de Majadahonda</b></p>
+        <h3 style="margin: 0.2rem 0 0.5rem 0;"><b style="color: #5da9ff;">Administrador de Sistemas y Desarrollo Freelance</b></h3>
+        <p>Durante <b>2024 y 2025</b> trabajé como freelancer desarrollando automatizaciones, sistemas de atención al cliente y administrando infraestructuras en entornos Linux para clientes internacionales. Estas tareas fortalecieron mi capacidad analítica a la hora de resolver problemas y configurar entornos técnicos complejos.</p>
       </div>
+
       <div class="studies">
-        <div>2026 - Actualidad</div>
-        <p style="color: white;">
-          <b>Próximos objetivos de aprendizaje:</b>
-          <ul>
-            <li style="color: white !important;">Exploración y modelado de arquitecturas y extensiones vectoriales RISC-V (RVV, IME).</li>
-            <li style="color: white !important;">Perfeccionamiento del uso del framework de simulación de microarquitectura gem5.</li>
-            <li style="color: white !important;">Estudio continuo de paradigmas de Arquitectura de Computadores.</li>
-          </ul>
-        </p>
+        <h3 style="margin: 0.2rem 0 0.5rem 0;"><b style="color: #5da9ff;">Profesor de Clases Particulares | Bachillerato</b></h3>
+        <p>Llevo <b style="color: rgba(255,255,255,0.7);">2 años y medio</b> impartiendo clases particulares de <b>Matemáticas, Dibujo Técnico y Física</b> a alumnos de primero y segundo de bachillerato. Esta labor ha potenciado mi capacidad de comunicación técnica y pedagogía: interiorizar a fondo los fundamentos para explicarlos de forma estructurada y comprensible.</p>
       </div>
     </section>
-    <section id="idiomas">
-      <h2>Idiomas</h2>
-      <div style="display: flex; flex-direction: row; gap: 10px;">
-        <div class="studies" style="width:50%; padding: 15px !important; text-align: center;"> 
-          <p><b style="color: #5da9ff;">Español:</b> Nativo</p>
+
+    <!-- 2. PROYECTOS -->
+    <section id="proyectos">
+      <h2>Proyectos</h2>
+
+      <!-- PROYECTO 1: Con botón a GitHub -->
+      <div class="project">
+        <h3>RELF — Simulador de resolución de símbolos y parser de binarios ELF</h3>
+        <p>Herramienta desarrollada en C para simular y analizar la resolución dinámica de símbolos externos en ejecutables ELF de 32 y 64 bits (desde la sección <code>.dynsym</code> del binario hasta la biblioteca compartida correspondiente, emulando los mecanismos de PLT/GOT). Integra además un parser de dependencias internas y headers ELF para facilitar la comprensión de enlaces en tiempo de ejecución.</p>
+        <div class="project-tags">
+          <span class="tag">C</span>
+          <span class="tag">ELF Binaries</span>
+          <span class="tag">PLT / GOT</span>
+          <span class="tag">Linux Low-Level</span>
         </div>
-        <div class="studies" style="width:50%; padding: 15px !important;  text-align: center;"> 
-          <p><b style="color: #5da9ff;">Inglés:</b> Nivel B2-C1</p>
-          <p>(Consumo habitual de contenido técnico y series)</p>
+        <div class="buttons">
+          <a class="btn btn-primary btn-github" href="https://github.com/javier-bau" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="-2.5 0 19 19"><path d="M9.464 17.178a4.506 4.506 0 0 1-2.013.317 4.29 4.29 0 0 1-2.007-.317.746.746 0 0 1-.277-.587c0-.22-.008-.798-.012-1.567-2.564.557-3.105-1.236-3.105-1.236a2.44 2.44 0 0 0-1.024-1.348c-.836-.572.063-.56.063-.56a1.937 1.937 0 0 1 1.412.95 1.962 1.962 0 0 0 2.682.765 1.971 1.971 0 0 1 .586-1.233c-2.046-.232-4.198-1.023-4.198-4.554a3.566 3.566 0 0 1 .948-2.474 3.313 3.313 0 0 1 .091-2.438s.773-.248 2.534.945a8.727 8.727 0 0 1 4.615 0c1.76-1.193 2.532-.945 2.532-.945a3.31 3.31 0 0 1 .092 2.438 3.562 3.562 0 0 1 .947 2.474c0 3.54-2.155 4.32-4.208 4.548a2.195 2.195 0 0 1 .625 1.706c0 1.232-.011 2.227-.011 2.529a.694.694 0 0 1-.272.587z"></path></svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+
+      <!-- PROYECTO 2: Sin botón a GitHub (Investigación en curso / Código académico) -->
+      <div class="project">
+        <h3>Modelado y Simulación de Arquitecturas Vectoriales RISC-V en gem5</h3>
+        <p>Investigación y modelado microarquitectónico de extensiones vectoriales RISC-V (como Vitruvius y Ara) utilizando el simulador gem5. Enfoque en la captura y reproducción de trazas RAVE, dimensionamiento de archivos de registros vectoriales y evaluación del rendimiento del subsistema de memoria.</p>
+        <div class="project-tags">
+          <span class="tag">gem5</span>
+          <span class="tag">RISC-V Vector</span>
+          <span class="tag">C++ / Python</span>
+          <span class="tag">Microarquitectura</span>
+        </div>
+        <!-- Sin botón a GitHub por ser investigación académica en curso -->
+      </div>
+
+      <!-- PROYECTO 3: Con botón a GitHub -->
+      <div class="project">
+        <h3>Análisis de Tráfico de Red y Filtrado Avanzado con NFTables</h3>
+        <p>Laboratorio de seguridad y redes con topología segregada implementando proxies directo e inverso sobre Linux. Aplicación de filtrado granular mediante hooks de NFTables y análisis de paquetes en servidores web Apache2/Nginx para detección de anomalías y estudio de patrones de tráfico cliente-servidor.</p>
+        <div class="project-tags">
+          <span class="tag">NFTables</span>
+          <span class="tag">Linux Networking</span>
+          <span class="tag">Proxies</span>
+          <span class="tag">Seguridad</span>
+        </div>
+        <div class="buttons">
+          <a class="btn btn-primary btn-github" href="https://github.com/javier-bau" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="-2.5 0 19 19"><path d="M9.464 17.178a4.506 4.506 0 0 1-2.013.317 4.29 4.29 0 0 1-2.007-.317.746.746 0 0 1-.277-.587c0-.22-.008-.798-.012-1.567-2.564.557-3.105-1.236-3.105-1.236a2.44 2.44 0 0 0-1.024-1.348c-.836-.572.063-.56.063-.56a1.937 1.937 0 0 1 1.412.95 1.962 1.962 0 0 0 2.682.765 1.971 1.971 0 0 1 .586-1.233c-2.046-.232-4.198-1.023-4.198-4.554a3.566 3.566 0 0 1 .948-2.474 3.313 3.313 0 0 1 .091-2.438s.773-.248 2.534.945a8.727 8.727 0 0 1 4.615 0c1.76-1.193 2.532-.945 2.532-.945a3.31 3.31 0 0 1 .092 2.438 3.562 3.562 0 0 1 .947 2.474c0 3.54-2.155 4.32-4.208 4.548a2.195 2.195 0 0 1 .625 1.706c0 1.232-.011 2.227-.011 2.529a.694.694 0 0 1-.272.587z"></path></svg>
+            GitHub
+          </a>
         </div>
       </div>
     </section>
+
+    <!-- 3. HABILIDADES -->
     <section id="habilidades">
       <h2>Habilidades / Conocimientos</h2>
       <div class="studies">
@@ -339,53 +536,71 @@
         </ul>
       </div>
       <div class="studies">
-        <p><b style="color: #5da9ff;">Habilidades blandas</b></p>
+        <p><b style="color: #5da9ff;">Habilidades profesionales y de investigación</b></p>
         <ul>
           <li style="color: white;">Mentalidad investigadora enfocada en entender profundamente el "porqué" de las cosas en hardware.</li>
-          <li style="color: white;">Resolución de problemas técnicos complejos mediante un análisis estructurado.</li>
-          <li style="color: white;">Colaboración en entornos de investigación académica.</li>
-          <li style="color: white;">Comunicación asertiva y formal orientada a perfiles técnicos e investigadores.</li>
+          <li style="color: white;">Resolución estructurada de problemas técnicos complejos en entornos de baja abstracción.</li>
+          <li style="color: white;">Colaboración activa en entornos de investigación académica universitaria.</li>
+          <li style="color: white;">Comunicación asertiva y formal orientada a perfiles técnicos, profesores e investigadores.</li>
         </ul>
       </div>
     </section>
 
+    <!-- 4. SOBRE MÍ -->
     <section id="sobre-mi">
       <h2>Sobre mí</h2>
-      <p>Soy estudiante de Ingeniería Informática en la Universidad Complutense de Madrid, firmemente orientado a la carrera de Arquitecto de Hardware.<br></p>
-      <p>Me apasiona desentrañar y construir las "tripas" de la computación. No me conformo con la capa de abstracción del software; busco entender los sistemas bajando a la microarquitectura, la lógica digital e incluso los conceptos físicos a nivel de transistor o de tecnología CMOS cuando el escenario lo requiere.<br></p>
+      <p>Soy estudiante de Ingeniería Informática en la Universidad Complutense de Madrid, firmemente orientado a la carrera de Arquitecto de Hardware.</p>
+      <p>Me apasiona desentrañar y construir las "tripas" de la computación. No me conformo con la capa de abstracción del software; busco entender los sistemas bajando a la microarquitectura, la lógica digital e incluso los conceptos físicos a nivel de transistor o de tecnología CMOS cuando el escenario lo requiere.</p>
       <p>Actualmente concentro mis esfuerzos en la investigación y modelado del procesamiento vectorial, el ecosistema RISC-V y la programación de aceleradores, preparando una base sólida para futuros estudios de posgrado e investigación.</p>
-    </section>
-    
-    <section id="experiencia">
-      <h2>Experiencia</h2>
       
-      <div class="studies">
-        <h3><b style="color: #5da9ff;">Investigación Académica y TFG | Arquitecturas Vectoriales (UCM)</b></h3>
-        <p>Actualmente trabajando en investigación de grado bajo la supervisión de los profesores <b>José Ignacio Gómez Pérez</b> y <b>Christian Tenllado van der Reijden</b>. Mi trabajo se centra en el modelado de extensiones de arquitectura vectorial (como Vitruvius y Ara) utilizando el simulador de microarquitectura <b>gem5</b>.</p>
-        <p>Esto involucra la extracción de trazas RAVE, el modelado preciso de archivos de registros vectoriales y la evaluación del rendimiento del subsistema de memoria.</p>
-      </div>
-
-      <div class="studies">
-        <h3><b style="color: #5da9ff;">Profesor de Clases Particulares | Alumnos de Bachillerato</b></h3>
-        <p>Llevo <b style="color: rgba(255,255,255,0.7);">2 años</b> y medio dando clases particulares a alumnos de segundo y primero de bachillerato de <b>Matemáticas, Dibujo Técnico y Física</b>. Esta experiencia me ha enseñado que no basta con tener conocimientos: siempre procuro interiorizarlos a fondo, lo que me permite comprenderlos plenamente y transmitirlos de manera clara y efectiva.</p>
-      </div>
-
-      <div class="studies">
-        <h3><b style="color: #5da9ff;">Administrador de Sistemas y Desarrollo Freelance</b></h3>
-        <p>Durante <b>2024 y 2025</b> trabajé como freelancer desarrollando automatizaciones, sistemas de atención al cliente y administrando infraestructuras en entornos Linux para clientes internacionales. Estas tareas fortalecieron mi capacidad analítica a la hora de resolver problemas y configurar entornos técnicos complejos.</p>
+      <div class="studies" style="margin-top: 1.5rem;">
+        <p><b style="color: #5da9ff;">Líneas de interés y especialización actual:</b></p>
+        <ul>
+          <li style="color: white;">Exploración y modelado de arquitecturas y extensiones vectoriales RISC-V (RVV, IME).</li>
+          <li style="color: white;">Perfeccionamiento del uso del framework de simulación de microarquitectura gem5.</li>
+          <li style="color: white;">Estudio continuo de paradigmas avanzados de Arquitectura de Computadores y subsistemas de memoria.</li>
+        </ul>
       </div>
     </section>
 
+    <!-- 5. ESTUDIOS -->
+    <section id="estudios">
+      <h2>Estudios / Formación</h2>
+      <div class="studies">
+        <div style="font-size: 0.85rem; color: var(--muted); margin-bottom: 0.25rem;">Septiembre 2023 - Junio 2027 (En curso)</div>
+        <p style="color: white; margin: 0;"><b>Grado en Ingeniería Informática (Rama de Ciencias de la Computación)</b> — Universidad Complutense de Madrid</p>
+      </div>
+      <div class="studies">
+        <div style="font-size: 0.85rem; color: var(--muted); margin-bottom: 0.25rem;">Septiembre 2011 - Junio 2022</div>
+        <p style="color: white; margin: 0;"><b>Titulado en Enseñanzas Profesionales de Música</b> — Conservatorio Profesional de Música de Majadahonda</p>
+      </div>
+    </section>
+
+    <!-- 6. IDIOMAS -->
+    <section id="idiomas">
+      <h2>Idiomas</h2>
+      <div class="lang-grid">
+        <div class="studies lang-card"> 
+          <p style="margin: 0;"><b style="color: #5da9ff;">Español:</b> Nativo</p>
+        </div>
+        <div class="studies lang-card"> 
+          <p style="margin: 0;"><b style="color: #5da9ff;">Inglés:</b> Nivel B2 - C1</p>
+          <span style="font-size: 0.8rem; color: var(--muted); display: block; margin-top: 0.35rem;">Competencia profesional técnica (lectura y redacción fluida de papers y documentación)</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. CONTACTO -->
     <section id="contacto">
       <h2>Contacto</h2>
-      <div class="social-buttons" style="justify-content: left !important;">
-        <a href="mailto:javier.bautistaluis@gmail.com" class="social-button email">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 7L10.94 11.3375C11.5885 11.7428 12.4115 11.7428 13.06 11.3375L20 7M5 18H19C20.1046 18 21 17.1046 21 16V8C21 6.89543 20.1046 6 19 6H5C3.89543 6 3 6.89543 3 8V16C3 17.1046 3.89543 18 5 18Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      <div class="social-buttons" style="justify-content: left;">
+        <a href="mailto:javier.bautistaluis@gmail.com" class="social-button email" title="Enviar correo">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 7L10.94 11.3375C11.5885 11.7428 12.4115 11.7428 13.06 11.3375L20 7M5 18H19C20.1046 18 21 17.1046 21 16V8C21 6.89543 20.1046 6 19 6H5C3.89543 6 3 6.89543 3 8V16C3 17.1046 3.89543 18 5 18Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
         </a>
-        <a href="https://github.com/javier-bau" class="social-button github">
+        <a href="https://github.com/javier-bau" class="social-button github" target="_blank" rel="noopener noreferrer" title="Perfil de GitHub">
           <svg class="cf-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="-2.5 0 19 19"><path d="M9.464 17.178a4.506 4.506 0 0 1-2.013.317 4.29 4.29 0 0 1-2.007-.317.746.746 0 0 1-.277-.587c0-.22-.008-.798-.012-1.567-2.564.557-3.105-1.236-3.105-1.236a2.44 2.44 0 0 0-1.024-1.348c-.836-.572.063-.56.063-.56a1.937 1.937 0 0 1 1.412.95 1.962 1.962 0 0 0 2.682.765 1.971 1.971 0 0 1 .586-1.233c-2.046-.232-4.198-1.023-4.198-4.554a3.566 3.566 0 0 1 .948-2.474 3.313 3.313 0 0 1 .091-2.438s.773-.248 2.534.945a8.727 8.727 0 0 1 4.615 0c1.76-1.193 2.532-.945 2.532-.945a3.31 3.31 0 0 1 .092 2.438 3.562 3.562 0 0 1 .947 2.474c0 3.54-2.155 4.32-4.208 4.548a2.195 2.195 0 0 1 .625 1.706c0 1.232-.011 2.227-.011 2.529a.694.694 0 0 1-.272.587z"></path></svg>
         </a>
-        <a href="https://www.linkedin.com/in/javier-bautista-luis-802675330" class="social-button linkedin">
+        <a href="https://www.linkedin.com/in/javier-bautista-luis-802675330" class="social-button linkedin" target="_blank" rel="noopener noreferrer" title="Perfil de LinkedIn">
           <svg viewBox="0 -2 44 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
           <g id="Icons" stroke="none" stroke-width="1">
               <g transform="translate(-702.000000, -265.000000)">
@@ -403,7 +618,6 @@
 
 <footer>
   Desarrollado por Javier Bautista Luis © 2026
-  <p>Página web incompleta | Sección de proyectos actualmente en desarrollo</p>
 </footer>
 
 </body>
